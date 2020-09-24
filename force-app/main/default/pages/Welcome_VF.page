@@ -1,0 +1,6 @@
+<apex:page >
+  <!-- Begin Default Content REMOVE THIS -->
+  <font color="yellow" size ="20">Congratulations</font>
+  <h1><i>This is your new Page: Welcome</i></h1>
+  <!-- End Default Content REMOVE THIS -->
+</apex:page>

@@ -1,0 +1,19 @@
+<apex:page standardController="Employee__c">
+    Hello {!$User.FirstName +' '+ $User.LastName}
+    <apex:form >
+        <apex:pageBlock title="New Employee">
+        <apex:pageBlockButtons location="bottom">
+            <apex:commandButton action="{!Save}" value="Save Emp"/>
+            <apex:commandButton action="{!Cancel}" immediate="true" value="Cancel"/>
+        </apex:pageBlockButtons>
+            <apex:pageBlockSection title="Info" columns="5">
+                <apex:inputField value="{!Employee__c.Name__c}"/>
+                <apex:inputCheckbox label="Active" value="{!Employee__c.Active__c}"/>
+                <apex:inputField value="{!Employee__c.Technology__c}"/>
+                <apex:inputtext label="City" value="{!Employee__c.City__c}"/>
+                <apex:inputtextarea label="My Description" value="{!Employee__c.My_Description__c}" />
+                <apex:inputsecret label="Pincode" value="{!Employee__c.PinCode__c}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,83 @@
+<apex:page controller="CustomPaginationController" sidebar="false" showHeader="false" tabStyle="Account">
+    <apex:form >
+        <apex:pageBlock title="Phone Number">
+            <apex:pageMessages ></apex:pageMessages>
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton action="{!Search}" value="Search" />
+            </apex:pageBlockButtons>
+            
+            <apex:pageblockSection >
+                <apex:inputText value="{!str}" label="Phone" />
+            </apex:pageblockSection>
+        </apex:pageBlock>
+        <apex:pageBlock id="pbId1" rendered="{!if(lstContact != null && lstContact.size > 0, true,false )}">
+		 
+            <apex:pageBlockSection columns="1" title="Contacts">
+            <apex:pageBlockTable value="{!lstContact}" var="cont" >
+                <apex:column headerValue="Conatct Name">
+                    <apex:commandLink action="{!'/apex/CreateTask?WhoId='+cont.Id+'&OwnerId='+cont.OwnerId+'&WhatId='+cont.AccountId}" value=" {!cont.FirstName}  {!cont.LastName} " ></apex:commandLink>
+                </apex:column>
+                <apex:column value="{!cont.FirstName}"/>
+                <apex:column value="{!cont.LastName}"/>
+            </apex:pageBlockTable>
+                <apex:panelGrid columns="8" > 
+                <div align="center"> 
+            	
+                <apex:outputPanel >                      
+                    <apex:actionStatus id="fetchStatus" >
+                        <apex:facet name="start" >
+                          <img src="/img/loading.gif" />                    
+                        </apex:facet>
+                    </apex:actionStatus>
+                </apex:outputPanel> 
+				<apex:commandButton status="fetchStatus" reRender="pbId1" value="First" action="{!Con1.first}" disabled="{!!Con1.hasPrevious}" title="First Page"/> 
+                <apex:commandButton status="fetchStatus" reRender="pbId1" value="Previous" action="{!Con1.previous}" disabled="{!!Con1.hasPrevious}" title="Previous Page"/> 
+                <apex:commandButton status="fetchStatus" reRender="pbId1" value="Next" action="{!Con1.next}" disabled="{!!Con1.hasNext}" title="Next Page"/> 
+                <apex:commandButton status="fetchStatus" reRender="pbId1" value="Last" action="{!Con1.last}" disabled="{!!Con1.hasNext}" title="Last Page"/> 
+                    </div>
+                </apex:panelGrid>  
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        <apex:pageBlock id="resultId2" rendered="{!if(lstAccount != null && lstAccount.size > 0, true,false )}">
+            <apex:pageBlockSection columns="1" title="Accounts">
+                <apex:pageBlockTable value="{!lstAccount}" var="acc" >
+                    <apex:column headerValue="Account Name">
+                		<apex:commandLink action="{!'/'+acc.Id}"> {!acc.Name} </apex:commandLink>
+                	</apex:column>
+                	<apex:column value="{!acc.Phone}"/>
+                	<apex:column value="{!acc.Owner.Name}"/>
+				<!--	<apex:column value="{!acc.Address__c}"/>
+               --> </apex:PageblockTable>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        <apex:pageBlock id="resultId3" rendered="{!if(lstLead != null && lstLead.size > 0, true,false )}">
+  <!--          <apex:pageBlockButtons location="Bottom">
+      <apex:image url="/img/search_prevarrow_disabled.gif" styleClass="prevArrow" rendered="{!NOT(Con.HasPrevious)}"/>  
+      <apex:image url="/img/search_prevarrow.gif" title="Previous Page" styleClass="prevArrow" rendered="{!Con.HasPrevious}"/>  
+      <apex:commandLink action="{!Previous}" title="Previous Page" value="Previous" rendered="{!Con.HasPrevious}"/>  
+      <apex:outputPanel styleClass="pShowLess noLink" style="color:grey" rendered="{!NOT(Con.HasPrevious)}">Previous</apex:outputPanel>           
+      <apex:outputPanel styleClass="pShowLess noLink" style="color:grey" rendered="{!NOT(Con.HasNext)}">Next</apex:outputPanel>           
+      <apex:commandLink title="Next Page" value="Next" rendered="{!Con.HasNext}" action="{!Next}"/>&nbsp;  
+      <apex:image url="/img/search_nextarrow.gif" title="Next Page" styleClass="nextArrow" rendered="{!Con.HasNext}"/>  
+      <apex:image url="/img/search_nextarrow_disabled.gif" rendered="{!NOT(Con.HasNext)}"/> 
+      <img src="/s.gif" title="Last Page" alt="Last Page" class="last"/>         
+         </apex:pageBlockButtons>                
+ -->       <apex:pageBlockSection columns="1" title="Leads">
+            <apex:pageBlockTable value="{!lstLead}" var="lead" >
+                <apex:column headerValue="Account Name">
+                		<apex:commandLink action="{!'/'+lead.Id}" value=" {!lead.Name}" ></apex:commandLink>
+                </apex:column>
+                <apex:column value="{!lead.Company}"/>
+                <apex:column value="{!lead.Phone}"/>
+            </apex:pageBlockTable>
+                            <div style="text-align:Left"> 
+                                Total Records Found: {!Con2.resultSize} <br/>
+                                Records Size is: {!lstLead.Size}
+            </div>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        <apex:pageBlock rendered="{!if(lstAccount.size == 0  && lstLead.size == 0 && lstContact ==  0, true, false )}">
+            No records Found
+        </apex:pageBlock>        
+    </apex:form>
+</apex:page>

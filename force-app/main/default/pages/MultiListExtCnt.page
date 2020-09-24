@@ -1,0 +1,32 @@
+<apex:page standardController="Account" extensions="MultiListExtCnt">
+    <apex:form >
+        <apex:pageBlock title="Phone Number">
+            <apex:pageMessages ></apex:pageMessages>
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton action="{!Search}" value="Search" />
+            </apex:pageBlockButtons>
+            
+            <apex:pageblockSection >
+                <apex:inputText value="{!acc.Name}" label="Name"/> 
+                <apex:inputText value="{!acc.Phone}" label="Phone" />
+            </apex:pageblockSection>
+        </apex:pageBlock>
+    	<apex:pageBlock >
+            <apex:pageBlockTable value="{!accList}" var="acc">
+                <apex:column ><apex:inputCheckbox /></apex:column>
+                <apex:column headerValue="Account Name">
+                		<apex:commandLink action="{!'/'+acc.Id}"> {!acc.Name} </apex:commandLink>
+                </apex:column>
+                <apex:column value="{!acc.Phone}" headerValue="Phone"/>
+                <apex:column value="{!acc.Fax}" headerValue="Fax" />
+            </apex:pageBlockTable>
+            
+            <apex:outputText ><br/><br/></apex:outputText>
+        <!--    <apex:pageBlockTable value="{!conList}" var="con">
+                <apex:column value="{!con.FirstName}" headervalue="FirstName"/>
+                <apex:column value="{!con.LastName}" headerValue="LastName" />
+            </apex:pageBlockTable>
+        -->    
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

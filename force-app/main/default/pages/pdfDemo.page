@@ -1,0 +1,11 @@
+<apex:page action="{!attachPDF}" extensions="attachPDFToAccount" standardController="Account">
+	<apex:pageMessages ></apex:pageMessages><!-- included for display of errors should they occur -->
+    <apex:outputText value="Hi"/>
+    <table>
+        <tr>
+        	<td>Test 1</td>
+            <td>Test 2</td>
+        </tr>
+    </table>
+     <!-- included so Account detail information is visible when errors occur -->
+</apex:page>

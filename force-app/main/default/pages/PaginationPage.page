@@ -1,0 +1,102 @@
+<apex:page controller="PaginationController"  tabStyle="Account" showHeader="false" sidebar="false">
+    <apex:form >
+        <apex:pageBlock title="Phone Number">
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton action="{!Search}" value="Search" />
+            </apex:pageBlockButtons>
+            <apex:pageblockSection >
+                <apex:inputText value="{!str}" label="Phone" />
+            </apex:pageblockSection>
+        </apex:pageBlock>
+        <apex:pageBlock rendered="{!if(noOfAcc>0 || noOfCon>0 || noOfLead>0, true, false)}">
+            <apex:pageMessages ></apex:pageMessages>
+            <apex:pageBlockSection title="All Contacts" collapsible="false" columns="1"  id="pbId2" rendered="{!if(setCon2 != null && setCon2.ResultSize > 0, true,false )}">
+                <apex:pageBlockTable value="{!Contacts}" var="cont" >
+                    <apex:column headerValue="Conatct Name">
+                        <apex:commandLink action="{!contactClicked}" value=" {!cont.FirstName}  {!cont.LastName}" id="theCommandLink">
+                            <apex:param value="{!cont.id}" name="whoId" assignTo="{!selectedContact}" ></apex:param>
+                        </apex:commandLink>
+                    </apex:column>
+                    <apex:column value="{!cont.AccountId}"/>
+                    <apex:column value="{!cont.Phone}"/>
+                    <apex:column headerValue="Email">
+                        <apex:outputText value="{!cont.Email}"/>
+                    </apex:column>
+                </apex:pageBlockTable>
+                <apex:panelGrid columns="6"> 
+                <apex:outputText >Displaying {!(setCon2.pageNumber * size)+1-size}-{!IF((setCon2.pageNumber * size)>noOfCon, noOfCon,
+                     (setCon2.pageNumber * size))} of {!noOfCon}
+                </apex:outputText> 
+                <apex:commandButton status="fetchStatus" reRender="pbId2" value="First" action="{!setCon2.first}" disabled="{!!setCon2.hasPrevious}" title="First Page"/> 
+                <apex:commandButton status="fetchStatus" reRender="pbId2" value="Previous" action="{!setCon2.previous}" disabled="{!!setCon2.hasPrevious}" title="Previous Page"/> 
+                <apex:commandButton status="fetchStatus" reRender="pbId2" value="Next" action="{!setCon2.next}" disabled="{!!setCon2.hasNext}" title="Next Page"/> 
+                <apex:commandButton status="fetchStatus" reRender="pbId2" value="Last" action="{!setCon2.last}" disabled="{!!setCon2.hasNext}" title="Last Page"/> 
+                <apex:outputPanel >                      
+                    <apex:actionStatus id="fetchStatus" >
+                        <apex:facet name="start" >
+                          <img src="/img/loading.gif" />                    
+                        </apex:facet>
+                    </apex:actionStatus>
+                </apex:outputPanel>
+                </apex:panelGrid>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="All Accounts" collapsible="false" columns="1" id="pbId1" rendered="{!if(setCon1 != null && setCon1.ResultSize > 0, true,false )}">
+                <apex:pageBlockTable value="{!Accounts}" var="acc" >
+                    <apex:column headerValue="Account Name">
+                        <apex:commandLink action="{!'/apex/CreateTask?WhatId='+acc.Id+'&OwnerId='+acc.OwnerId+'&retURL='+acc.id}"> {!acc.Name} </apex:commandLink>
+                    </apex:column>
+                    <apex:column value="{!acc.Phone}"/>
+                    <apex:column value="{!acc.Owner.Name}"/>
+                   <!--    <apex:column value="{!acc.Address__c}"/>  -->
+                </apex:pageBlockTable>
+                <apex:panelGrid columns="6">
+                    <apex:outputText >Displaying {!(setCon1.pageNumber * size)+1-size}-{!IF((setCon1.pageNumber * size)>noOfAcc, noOfAcc,
+                         (setCon1.pageNumber * size))} of {!noOfAcc}
+                    </apex:outputText> 
+                    <apex:commandButton status="fetchStatus" reRender="pbId1" value="First" action="{!setCon1.first}" disabled="{!!setCon1.hasPrevious}" title="First Page"/> 
+                    <apex:commandButton status="fetchStatus" reRender="pbId1" value="Previous" action="{!setCon1.previous}" disabled="{!!setCon1.hasPrevious}" title="Previous Page"/> 
+                    <apex:commandButton status="fetchStatus" reRender="pbId1" value="Next" action="{!setCon1.next}" disabled="{!!setCon1.hasNext}" title="Next Page"/> 
+                    <apex:commandButton status="fetchStatus" reRender="pbId1" value="Last" action="{!setCon1.last}" disabled="{!!setCon1.hasNext}" title="Last Page"/> 
+                    <apex:outputPanel >                      
+                        <apex:actionStatus id="fetchStatus" >
+                            <apex:facet name="start" >
+                              <img src="/img/loading.gif" />                    
+                            </apex:facet>
+                        </apex:actionStatus>
+                    </apex:outputPanel>
+                </apex:panelGrid>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="All Leads" collapsible="false" columns="1" id="pbId3" rendered="{!if(setCon3 != null && setCon3.ResultSize > 0, true,false )}">
+                <apex:pageBlockTable value="{!Leads}" var="lead" >
+                    <apex:column headerValue="Lead Name">
+                            <apex:commandLink action="{!'/apex/CreateTask?WhoId='+lead.Id+'&OwnerId='+lead.OwnerId+'&retURL='+lead.id}" value=" {!lead.Name}" ></apex:commandLink>
+                    </apex:column>
+                    <apex:column value="{!lead.Company}"/>
+                    <apex:column value="{!lead.Phone}"/>
+                </apex:pageBlockTable>
+                <apex:panelGrid columns="6"> 
+                    <apex:outputText >Displaying {!(setCon3.pageNumber * size)+1-size}-{!IF((setCon3.pageNumber * size)>noOfLead, noOfLead,
+                         (setCon3.pageNumber * size))} of {!noOfLead}
+                    </apex:outputText> 
+                    <apex:commandButton status="fetchStatus" reRender="pbId3" value="First" action="{!setCon3.first}" disabled="{!!setCon3.hasPrevious}" title="First Page"/> 
+                    <apex:commandButton status="fetchStatus" reRender="pbId3" value="Previous" action="{!setCon3.previous}" disabled="{!!setCon3.hasPrevious}" title="Previous Page"/> 
+                    <apex:commandButton status="fetchStatus" reRender="pbId3" value="Next" action="{!setCon3.next}" disabled="{!!setCon3.hasNext}" title="Next Page"/> 
+                    <apex:commandButton status="fetchStatus" reRender="pbId3" value="Last" action="{!setCon3.last}" disabled="{!!setCon3.hasNext}" title="Last Page"/> 
+                    <apex:outputPanel >                      
+                        <apex:actionStatus id="fetchStatus" >
+                            <apex:facet name="start" >
+                              <img src="/img/loading.gif" />                    
+                            </apex:facet>
+                        </apex:actionStatus>
+                    </apex:outputPanel>
+                </apex:panelGrid>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        <apex:pageBlock rendered="{!if(noOfAcc==0 && noOfCon==0 && noOfLead==0, true, false)}" >
+            No Contact or Account or Lead Records Found
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton action="{!newTask}" value="Create New Task" />
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

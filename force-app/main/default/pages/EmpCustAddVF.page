@@ -1,0 +1,16 @@
+<apex:page Controller="EmpCustAdd">
+    Hello {!$User.FirstName +' '+ $User.LastName}
+    <apex:form >
+        <apex:pageBlock title="New Employee Address">
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!Save}" value="Save Add"/>
+                <apex:commandButton action="{!Cancel}" value="Cancel"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="Info">
+                <apex:inputField value="{!emp_1.City__c}"/>
+                <apex:inputField value="{!emp_1.State__c}"/>
+                <apex:inputField value="{!emp_1.Employee__c}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

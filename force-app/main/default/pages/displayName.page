@@ -1,0 +1,7 @@
+<apex:page standardcontroller="Account" extensions="templateExample">
+    <apex:include pageName="formTemplate"/>
+    <apex:pageBlock >
+    <apex:actionSupport event="onClick" action="{!save}" rerender="greeting"/>
+    <apex:outputText id="greeting" rendered="{!showGreeting}" value="Hello {!nameField}"/>
+        </apex:pageBlock>
+</apex:page>

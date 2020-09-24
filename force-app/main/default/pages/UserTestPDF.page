@@ -1,0 +1,25 @@
+<apex:page docType="html-5.0" title="PDF Contact" showHeader="false" sidebar="false" standardController="Contact" extensions="UserTestExtCnt" renderAs="pdf" readOnly="true" applyHtmlTag="false" applyBodyTag="false">
+<style type="text/css">
+        a.nounderline {text-decoration: none; }
+    </style>
+    1.<apex:outputField value="{!Contact.User__r.Name}"/><br/>
+    2.<apex:outputField value="{!Contact.LastName}" /><br/>
+	3.<apex:outputField value="{!Contact.User__c}" styleClass="nounderline"/><br/>
+    4.<apex:outputText value="{!Contact.UsName__c}"/><br/>
+    5.<apex:outputText value="{!Contact.UserName__c}" /><br/>
+    6.<apex:outputText value="{!newCon.User__r.Name}" /><br/>
+    7.<apex:outputField value="{!Contact.UserName__c}" /><br/>
+    8.<apex:outputField value="{!Contact.UsName__c}" /><br/>
+    9.<apex:outputField value="{!newCon.UserName__c}" /><br/>
+    10.<apex:outputField value="{!newCon.UsName__c}" /><br/>
+    <br/>
+    1.<apex:outputLabel value="{!Contact.User__r.Name}"/><br/>
+    2.<apex:outputLabel value="{!Contact.UserName__c}" /><br/>
+	3.<apex:outputLabel value="{!Contact.User__c}"/><br/>
+    
+    1.<apex:outputLabel value="{!newCon.User__r.Name}"/><br/>
+    2.<apex:outputLabel value="{!newCon.UserName__c}" /><br/>
+	3.<apex:outputLabel value="{!newCon.User__c}"/><br/>
+    
+    4.<apex:outputLabel value="{!spName}"/><br/>
+</apex:page>

@@ -1,0 +1,14 @@
+<apex:page Controller="DispatcherContactNewController">
+        <apex:form >
+            <apex:pageBlock title="Recent Product Briefs">
+                <apex:pageBlockTable value="{!pbs}" var="p" >
+                    <apex:column >
+                        <apex:commandLink action="{!assetClicked}" value="{!p.LastName}" id="theCommandLink"> 
+      	                  <apex:param value="{!p.id}" name="whoId" assignTo="{!selectedAsset}" ></apex:param>
+                        </apex:commandLink>
+                     </apex:column>
+                     <apex:column value="{!p.id}"/>
+                </apex:pageBlockTable> 
+            </apex:pageBlock>
+        </apex:form>
+</apex:page>

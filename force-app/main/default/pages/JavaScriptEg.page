@@ -1,0 +1,28 @@
+<apex:page standardController="Account" showHeader="false" sidebar="false" >
+    <script type="text/javascript">
+        window.onload = function() {
+            document.getElementById("{!$Component.frm.pb.pbs.block}").style.display = 'none';
+        }
+        function showBlocked(){
+            if(document.getElementById('{!$Component.frm.pb.pbs.blocked}').value == 'No'){
+                alert("Account Number is Blocked");
+                document.getElementById("{!$Component.frm.pb.pbs.block}").style.display='none';
+                document.getElementById("{!$Component.frm.pb.pbs.block1}").style.display='none';
+            }
+            else{
+                //alert("Account Number is Not-Blocked");
+                document.getElementById("{!$Component.frm.pb.pbs.block}").style.display='block';
+                document.getElementById("{!$Component.frm.pb.pbs.block1}").style.display='block';
+            }
+        }
+    </script>
+    <apex:form id="frm">
+        <apex:pageBlock title="JavaScript Eg" id="pb">
+            <apex:pageBlockSection id="pbs" columns="2" collapsible="false">
+                <apex:inputField id="blocked" value="{!Account.Name}" onchange="showBlocked()"/>
+                <apex:inputField id="block" value="{!Account.AccountNumber}"/>
+                <apex:inputField id="block1" value="{!Account.AccountNumber}"/>    
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

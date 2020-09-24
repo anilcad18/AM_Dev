@@ -1,0 +1,17 @@
+<apex:page controller="Checkbox_del">  
+    <apex:Form >  
+    	 <apex:pageBlock title="List of Accounts">  
+       		<apex:pageBlockButtons location="top" >  
+         		<apex:commandButton value="Delete" action="{!deleterecords}"/>  
+       		</apex:pageBlockButtons>  
+       		<apex:pageBlockTable value="{!wrappers}" var="wrap">  
+        		 <apex:column headerValue="Select">            
+        		 <apex:inputCheckbox value="{!wrap.isSelected}"/>  
+        		 </apex:column>  
+         			<apex:column value="{!wrap.myAccount.name}"/> 
+         			<apex:column value="{!wrap.myAccount.industry}"/>  
+         			<apex:column value="{!wrap.myAccount.phone}"/>  
+       		</apex:pageBlockTable>  
+     	</apex:pageBlock>  
+   </apex:Form>  
+</apex:page>

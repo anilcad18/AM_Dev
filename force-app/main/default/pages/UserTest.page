@@ -1,0 +1,17 @@
+<apex:page standardController="Contact" extensions="UserTestExtCnt">
+    <apex:form >
+        <apex:pageBlock >
+        	<apex:pageBlockButtons >
+            	<apex:commandButton value="Save Contact" action="{!Save}"/>
+                <apex:commandButton Value="Cancel" action="{!Cancel}"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection >
+            	<apex:inputField value="{!newCon.User__c}" /> 
+                <apex:inputField value="{!newCon.LastName}" />
+                <apex:inputHidden value="{!newCon.UserName__c}"/>
+                <apex:inputHidden value="{!newCon.UsName__c}"/>
+                <apex:outputLabel value="{!spName}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>    
+    </apex:form>
+</apex:page>

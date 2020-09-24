@@ -1,0 +1,45 @@
+<apex:page id="pg" controller="CreateTaskCtrl" tabStyle="Task" >
+        <script type="text/javascript">
+        	window.onload = function() {
+                showAccount();
+    		}
+    		function showAccount()
+            {
+                var e = document.getElementById('pg:frm:pb:pbs:name_mlktp');
+                var who = e.options[e.selectedIndex].value;
+                if(who == '00Q'){
+                    document.getElementById('pg:frm:pb:pbs:acc_mlktp').style.display='none';
+                    document.getElementById('pg:frm:pb:pbs:acc').style.display='none';
+                    document.getElementById('pg:frm:pb:pbs:acc_lkwgt').style.display='none';
+                }
+                else{
+                    document.getElementById('pg:frm:pb:pbs:acc_mlktp').style.display='inline-block';
+                    document.getElementById('pg:frm:pb:pbs:acc').style.display='inline-block';
+                    document.getElementById('pg:frm:pb:pbs:acc_lkwgt').style.display='inline-block';
+                }
+            }
+        </script>
+    <apex:form id="frm">
+        <apex:pageBlock id="pb" title="Task Edit"  >
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!Save}" value="Save Task"/>
+                <apex:commandButton action="{!Cancel}" immediate="true" value="Cancel"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection id="pbs" title="Task Information" collapsible="false" columns="2" >
+                <apex:inputField value="{!tsk.OwnerId}" />
+                <apex:inputField value="{!tsk.Status}"/>
+                <apex:inputField value="{!tsk.Subject}"/>
+                <apex:inputField id="name" value="{!tsk.WhoId}" onchange="showAccount()" />
+                <apex:inputField value="{!tsk.ActivityDate}" />
+  	            <apex:inputField id="acc" value="{!tsk.WhatId}" />
+                <apex:inputField value="{!tsk.Priority}" />
+            </apex:pageBlockSection>
+			<apex:pageBlockSection title="Description" collapsible="false" >
+                <apex:pageBlockSectionItem dataStyle="width:200px"  >
+                    <apex:outputLabel >Comments</apex:outputLabel>
+                	<apex:inputField value="{!tsk.Description}" style="width:550px; height:100px" />
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
