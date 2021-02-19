@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
 	<types>
+		<members>OMNI_BatchManagerTree</members>
+		<members>OMNI_BatchManagerTreeTest</members>
+		<members>OMNI_ManagerTreeBean</members>
+		<members>OMNI_ManagerTreeCallout</members>
+		<members>OMNI_ManagerTreeCalloutMock</members>
+		<members>OMNI_ManagerTreeCalloutTest</members>
+		<members>Omni_ManagerTreeSchedule</members>
+		<members>Omni_ManagerTreeScheduleTest</members>
+		<name>ApexClass</name>
+	</types>
+	<types>
 		<members>pageMessage</members>
 		<name>AuraDefinitionBundle</name>
 	</types>
