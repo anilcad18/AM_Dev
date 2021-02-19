@@ -1,0 +1,9 @@
+<template>
+    <div class={backgroundClass} role="alert">
+        <span class="slds-assistive-text">{messageType}</span>
+        <span class={messageClass} title="Description of icon when needed">
+           <lightning-icon variant="bare" icon-name={iconName} size="x-small"></lightning-icon>
+        </span>
+        <h2 class="slds-text-body_regular">{message}</h2>
+    </div>
+</template>

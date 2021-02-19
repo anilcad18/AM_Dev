@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata" fqn="migrateDesignAttributeToLWC">
+    <apiVersion>50.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>PageMessageLWC</masterLabel>
+    <description>This component shows ability to expose public property to Lightning App Builder, App Manager.</description>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightning__AppPage</target>
+        <target>lightning__HomePage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage,lightning__AppPage,lightning__HomePage">
+            <property name="message" type="String"/>
+            <property name="messageType" type="String" datasource="default,warning,error"/>
+            <!-- <property name="background" type="String" datasource="default,warning,error,success"/> -->
+            <!-- <property name="background" type="String" datasource="slds-alert_default,slds-alert_warning,slds-alert_error"/> -->
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>
