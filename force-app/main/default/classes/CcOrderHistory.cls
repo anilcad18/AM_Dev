@@ -24,6 +24,7 @@ public class CcOrderHistory {
         if (response.getStatusCode() == 200) {
             System.debug('**** The respnose:' + JSON.serialize(response.getBody()));
             JSONParser parser = JSON.createParser(response.getBody());
+            System.debug('***ParsedToken is:'+parser);
             while (parser.nextToken() != null) {
                 if ((parser.getCurrentToken() == JSONToken.FIELD_NAME) && 
                     (parser.getText() == 'access_token')) {
