@@ -6,6 +6,7 @@
  * Modifications Log 
  * Ver   Date         Author        Modification
  * 1.0   04-04-2021   Anil Mannem   Initial Version
+ * test commit 2
 **/
 public class AccClassTrigger {
     public static boolean runOnce = true;
