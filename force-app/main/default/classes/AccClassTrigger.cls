@@ -1,19 +1,16 @@
 /**
  * @description       : 
  * @author            : Anil Mannem
- * @last modified on  : 04-04-2021
+ * @last modified on  : 04-06-2021
  * @last modified by  : Anil Mannem
  * Modifications Log 
  * Ver   Date         Author        Modification
  * 1.0   04-04-2021   Anil Mannem   Initial Version
  * test commit 2
+ * Ti is a test changes
 **/
 public class AccClassTrigger {
     public static boolean runOnce = true;
-    /**
-    * @description 
-    * @author Anil Mannem | 04-04-2021 
-    **/
     public AccClassTrigger(){
         system.debug('The size is '+trigger.size+' ****** Runonce '+runOnce);
         //runOnce = true;
