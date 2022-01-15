@@ -6,7 +6,7 @@
  * Modifications Log 
  * Ver   Date         Author        Modification
  * 1.0   04-06-2021   Anil Mannem   Initial Version
-**/
+**/ 
 public Class AccountBean {
     @AuraEnabled
     public String AccountId {get; set;}

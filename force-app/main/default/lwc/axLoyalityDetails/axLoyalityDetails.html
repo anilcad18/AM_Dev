@@ -1,0 +1,74 @@
+<template>
+    <template if:true={loading}>
+        <div class="spin">
+            <lightning-spinner alternative-text="Loading" class="large"></lightning-spinner>
+        </div>
+    </template>
+    <lightning-layout>
+        <template if:true={errMsg}>
+            <div class="slds-text-heading_medium slds-text-color_error slds-text-align_center">{errMsg}</div>
+        </template>
+    </lightning-layout>
+    <template if:false={errMsg}>
+        <lightning-layout multiple-rows="true" class="large">
+            <lightning-layout-item size="6" flexibility="auto" padding="around-small">
+                <h3 class="slds-section-title--divider">Cards</h3>
+                <template if:true={cardList}> 
+                    <lightning-datatable
+                        key-field="cardId"
+                        data={cardList}
+                        columns={cardColumns}
+                        onsort={onClickCardsToSort}
+                        sorted-direction={sortedDirection}
+                        sorted-by={sortedBy}
+                        hide-checkbox-column
+                        show-row-number-column>
+                    </lightning-datatable>
+                </template>
+                <template if:false={cardList}>
+                    <div class="slds-text-heading_medium slds-text-color_error slds-text-align_center">No Cards are Available</div>
+                </template>    
+            </lightning-layout-item>
+                
+            <lightning-layout-item size="6" flexibility="auto" padding="around-small">
+                <h3 class="slds-section-title--divider">Programs</h3>
+                <template if:true={programList}>
+                    <lightning-datatable
+                        key-field="programId"
+                        data={programList}
+                        columns={programColumns}
+                        onsort={onClickProgramsToSort}
+                        sorted-direction={sortedDirection}
+                        sorted-by={sortedBy}
+                        hide-checkbox-column
+                        show-row-number-column>
+                    </lightning-datatable>
+                </template>
+                <template if:false={programList}>
+                    <div class="slds-text-heading_medium slds-text-color_error slds-text-align_center"> No Programs Available </div>
+                </template>
+            </lightning-layout-item>    
+        </lightning-layout>
+
+        <lightning-layout>
+            <lightning-layout-item size="12" padding="around-small">
+                <h3 class="slds-section-title--divider">Offers and Reedemptions</h3>
+                <template if:true={offerList}> 
+                    <lightning-datatable
+                        key-field="offerId"
+                        data={offerList}
+                        columns={offerColumns}
+                        onsort={onClickOffersToSort}
+                        sorted-direction={sortedDirection}
+                        sorted-by={sortedBy}
+                        hide-checkbox-column
+                        show-row-number-column>
+                    </lightning-datatable>
+                </template>    
+                <template if:false={offerList}>
+                    <div class="slds-text-heading_medium slds-text-color_error slds-text-align_center"> No Offers Available </div>
+                </template>
+            </lightning-layout-item>
+        </lightning-layout>
+    </template>
+</template>

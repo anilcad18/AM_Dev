@@ -1,0 +1,138 @@
+<template>
+    <template if:true={loading}>
+        <div class="spin">
+            <lightning-spinner alternative-text="Loading" class="large"></lightning-spinner>
+        </div>
+    </template>
+    <lightning-layout>
+        <template if:true={errMsg}>
+            <div class="slds-text-heading_medium slds-text-color_error slds-text-align_center">
+                {errMsg}
+            </div>
+        </template>
+    </lightning-layout>
+    <template if:true={orderList}>
+        <lightning-layout multiple-rows="true">
+            <lightning-layout-item size="12" padding="around-small">
+                <h3 class="slds-section-title--divider">Orders</h3>
+                    <lightning-datatable key-field="order_no" 
+                        data={orderList} 
+                        columns={orderColumns} 
+                        onrowaction={doSelectedRow} 
+                        onsort={onClickOrdersToSort}
+                        sorted-direction={sortedDirection}
+                        sorted-by={sortedBy}
+                        hide-checkbox-column
+                        show-row-number-column>
+                    </lightning-datatable>
+            </lightning-layout-item>
+        </lightning-layout>
+
+        <template if:true={showModal}>
+            <div class="demo-only" style="height: 640px;">
+                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                        <header class="slds-modal__header">
+                            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={doCloseModal}>
+                                <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="medium">
+                                </lightning-icon>
+                                <span class="slds-assistive-text">Close</span>
+                            </button>
+                            <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate"><b>Order Details</b></h2>
+                        </header>
+                        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                            <template if:true={caseView}>
+                                <lightning-layout multiple-rows="true" class="large">
+                                    <lightning-layout-item size="12">
+                                        <h3 class="slds-section-title--divider"><b>Order No: </b> {caseView.order_no}</h3>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="6" padding="around-small">
+                                        <b>Order Status : </b>{caseView.status}
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="6" padding="around-small">
+                                        <b>Shipping Status : </b>{caseView.shipping_status}
+                                    </lightning-layout-item>
+                                    
+                                    <lightning-layout-item size="4" padding="around-small">
+                                        <h3 class="slds-section-title--divider">Billing Address</h3>
+                                        <lightning-layout multiple-rows="true">
+                                            <lightning-layout-item size="12">
+                                                <b>{caseView.billing_address.full_name}</b><br/>
+                                                {caseView.billing_address.address1}<br/>
+                                                {caseView.billing_address.city}<br/>
+                                                {caseView.billing_address.state_code}, {caseView.billing_address.country_code}<br/>
+                                                {caseView.billing_address.postal_code}<br/>
+                                                {caseView.billing_address.phone}<br/>
+                                            </lightning-layout-item>
+                                        </lightning-layout>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="4" padding="around-small">
+                                        <h3 class="slds-section-title--divider">Shipping Address</h3>
+                                        <lightning-layout multiple-rows="true">
+                                            <lightning-layout-item size="12">
+                                                <b>{shipmentAddress.shipping_address.full_name}</b><br/>
+                                                {shipmentAddress.shipping_address.address1}<br/>
+                                                {shipmentAddress.shipping_address.city}<br/>
+                                                {shipmentAddress.shipping_address.state_code}, {shipmentAddress.shipping_address.country_code}<br/>
+                                                {shipmentAddress.shipping_address.postal_code}<br/>
+                                                {shipmentAddress.shipping_address.phone}<br/>
+                                            </lightning-layout-item>
+                                        </lightning-layout>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="4" padding="around-small">
+                                        <h3 class="slds-section-title--divider">Payment Methods</h3>
+                                        <lightning-layout multiple-rows="true">
+                                            <lightning-layout-item size="12">
+                                                <b>Payment Type : </b>{paymentInstruments.payment_method_id}<br/>
+                                                <b>Status : </b>{caseView.payment_status}<br/>
+                                                <b>Amount : </b>{caseView.order_total}<br/>
+                                            </lightning-layout-item>
+                                        </lightning-layout>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </template>
+                            <template if:true={productList}> 
+                                <lightning-layout multiple-rows="true">
+                                    <lightning-layout-item size="12" padding="around-small">
+                                        <lightning-datatable key-field="product_id" 
+                                            data={productList} 
+                                            columns={productColumns} 
+                                            hide-checkbox-column>
+                                        </lightning-datatable>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </template>
+                            <template if:true={caseView}>
+                                <lightning-layout multiple-rows="true" class="large">
+                                    <lightning-layout-item size="12" flexibility="auto">
+                                        <h3 class="slds-section-title--divider">Payment Total</h3>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="6" flexibility="auto" padding="around-small">
+                                        <div class="slds-text-align_left">
+                                            <b>Subtotal</b><br/>
+                                            <b>Shipping Total</b><br/>
+                                            <b>Taxe(s)</b><br/>
+                                            <b>Total</b><br/>
+                                        </div>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="6" flexibility="auto" padding="around-small">
+                                        <div class="slds-text-align_right">
+                                            C$ {caseView.product_sub_total}<br/>
+                                            C$ {caseView.shipping_total}<br/>
+                                            C$ {caseView.tax_total}<br/>
+                                            <b>{caseView.order_total}</b><br/>
+                                        </div>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </template>
+                        </div>
+                        <footer class="slds-modal__footer">
+                            <lightning-button label="Cancel" variant="neutral" onclick={doCloseModal}></lightning-button>&nbsp;&nbsp;&nbsp;&nbsp;
+                        </footer>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+            </div>
+        </template>
+    </template>
+</template>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>test_email</fullName>
+        <description>test email</description>
+        <protected>false</protected>
+        <recipients>
+            <type>creator</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/SalesNewCustomerEmail</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Stage_Update</fullName>
+        <field>StageName</field>
+        <literalValue>Needs Analysis</literalValue>
+        <name>Stage Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>Test Opportunity</fullName>
+        <actions>
+            <name>Stage_Update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <formula>CreatedDate =  DATETIMEVALUE(TODAY())</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Test_Task</name>
+                <type>Task</type>
+            </actions>
+            <offsetFromField>Opportunity.CreatedDate</offsetFromField>
+            <timeLength>0</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>test_email</name>
+                <type>Alert</type>
+            </actions>
+            <offsetFromField>Opportunity.CloseDate</offsetFromField>
+            <timeLength>-15</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <tasks>
+        <fullName>Test_Task</fullName>
+        <assignedTo>anil.dev@gmail.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>10</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Opportunity.CloseDate</offsetFromField>
+        <priority>High</priority>
+        <protected>false</protected>
+        <status>In Progress</status>
+        <subject>Test Task</subject>
+    </tasks>
+</Workflow>

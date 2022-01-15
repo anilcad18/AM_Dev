@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <defaultLandingTab>standard-home</defaultLandingTab>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <tabs>standard-UserProfile</tabs>
+    <tabs>standard-Chatter</tabs>
+    <tabs>standard-OtherUserProfile</tabs>
+    <tabs>standard-WorkFeedbackRequest</tabs>
+    <tabs>standard-Coaching</tabs>
+    <tabs>standard-WorkPerformanceCycle</tabs>
+    <tabs>standard-GoalV2</tabs>
+    <tabs>standard-Metric</tabs>
+    <tabs>Book__c</tabs>
+    <tabs>Blog_Entry__c</tabs>
+    <tabs>Electronics__c</tabs>
+    <tabs>Suggestion__c</tabs>
+    <tabs>Bidder__c</tabs>
+    <tabs>Energy_Audit__c</tabs>
+</CustomApplication>

@@ -5,13 +5,20 @@
         <language>en_US</language>
         <protected>true</protected>
         <shortDescription>Case Delete LastNMonths</shortDescription>
-        <value>36</value>
+        <value>60</value>
     </labels>
     <labels>
         <fullName>Case_Delete_LastNYears</fullName>
         <language>en_US</language>
         <protected>true</protected>
         <shortDescription>Case Delete LastNYears</shortDescription>
-        <value>4</value>
+        <value>5</value>
+    </labels>
+    <labels>
+        <fullName>Maintenance_Notification_Receiver</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Maintenance Notification Receiver</shortDescription>
+        <value>anil.mannem18@gmail.com</value>
     </labels>
 </CustomLabels>

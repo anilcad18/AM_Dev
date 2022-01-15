@@ -1,0 +1,7 @@
+.slds-modal__container {
+    max-width: 80rem !important;
+    width: 70% !important;
+}
+.spin {
+    padding: 100px;
+}

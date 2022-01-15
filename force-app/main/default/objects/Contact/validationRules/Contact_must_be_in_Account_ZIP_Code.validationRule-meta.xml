@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contact_must_be_in_Account_ZIP_Code</fullName>
+    <active>false</active>
+    <description>a validation rule which will block the saving of a new or updated contact if the contact is related to an account and has a mailing postal code (which has the API Name MailingPostalCode) different from the account&apos;s shipping postal code (which has the API</description>
+    <errorConditionFormula>AND (
+
+NOT(ISBLANK( AccountId )),
+
+MailingPostalCode &lt;&gt; Account.ShippingPostalCode
+
+)</errorConditionFormula>
+    <errorMessage>a validation rule which will block the saving of a new or updated contact if the contact is related to an account and has a mailing postal code (which has the API Name MailingPostalCode) different from the account&apos;s shipping postal code (which has the AP</errorMessage>
+</ValidationRule>
